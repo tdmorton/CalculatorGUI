@@ -23,50 +23,51 @@ namespace CalculatorGUI
 
         private void Btn1_Click(object sender, RoutedEventArgs e)
         {
-            
+            Button b = (Button) sender;
+            numberBlock.Text = b.Content.Text;
         }
 
-        private void Btn2_Click(object sender, RoutedEventArgs e)
+        private void BtnEq_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Btn3_Click(object sender, RoutedEventArgs e)
+        private void BtnMin_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Btn4_Click(object sender, RoutedEventArgs e)
+        private void BtnPlus_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Btn5_Click(object sender, RoutedEventArgs e)
+        private void BtnPer_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Btn6_Click(object sender, RoutedEventArgs e)
+        private void BtnPM_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Btn7_Click(object sender, RoutedEventArgs e)
+        private void BtnMult_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Btn8_Click(object sender, RoutedEventArgs e)
+        private void BtnDiv_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Btn9_Click(object sender, RoutedEventArgs e)
+        private void BtnC_Click(object sender, RoutedEventArgs e)
         {
 
         }
 
-        private void Btn0_Click(object sender, RoutedEventArgs e)
+        private void BtnCE_Click(object sender, RoutedEventArgs e)
         {
 
         }
