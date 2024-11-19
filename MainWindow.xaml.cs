@@ -21,43 +21,29 @@ namespace CalculatorGUI
             InitializeComponent();
         }
 
+        private static string Extract_Text(object sender)
+        {
+            Button b = (Button)sender;
+            return b.Content.ToString();
+        }
+
         private void Btn1_Click(object sender, RoutedEventArgs e)
         {
-            Button b = (Button) sender;
-            numberBlock.Text = b.Content.Text;
+            numberBlock.Text += Extract_Text(sender);
         }
 
         private void BtnEq_Click(object sender, RoutedEventArgs e)
         {
-
+            equationBlock.Text += numberBlock.Text;
         }
 
-        private void BtnMin_Click(object sender, RoutedEventArgs e)
+        private void BtnOp_Click(object sender, RoutedEventArgs e)
         {
-
-        }
-
-        private void BtnPlus_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BtnPer_Click(object sender, RoutedEventArgs e)
-        {
-
+            equationBlock.Text += numberBlock.Text;
+            equationBlock.Text += " " + Extract_Text(sender) + " ";
         }
 
         private void BtnPM_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BtnMult_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void BtnDiv_Click(object sender, RoutedEventArgs e)
         {
 
         }

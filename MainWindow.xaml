@@ -28,7 +28,6 @@
                    Grid.Column="0" 
                    Grid.ColumnSpan="4"
                    HorizontalAlignment="Right">
-            5+3=
         </TextBlock>
         <TextBlock Name="numberBlock" 
                    Grid.Row="1" 
@@ -36,7 +35,6 @@
                    Grid.ColumnSpan="4" 
                    FontSize="56" 
                    HorizontalAlignment="Right">
-            8
         </TextBlock>
         <Button Name="Btn1"
                 Grid.Row="6"
@@ -57,69 +55,69 @@
                 Grid.Row="6"
                 Grid.Column="2"
                 Click="Btn1_Click"
-                Content="1"
+                Content="3"
                 FontSize="32">
         </Button>
         <Button Name="Btn4"
                 Grid.Row="5"
                 Grid.Column="0"
                 Click="Btn1_Click"
-                Content="1"
+                Content="4"
                 FontSize="32">
         </Button>
         <Button Name="Btn5"
                 Grid.Row="5"
                 Grid.Column="1"
                 Click="Btn1_Click"
-                Content="1"
+                Content="5"
                 FontSize="32">
         </Button>
         <Button Name="Btn6"
                 Grid.Row="5"
                 Grid.Column="2"
                 Click="Btn1_Click"
-                Content="1"
+                Content="6"
                 FontSize="32">
         </Button>
         <Button Name="Btn7"
                 Grid.Row="4"
                 Grid.Column="0"
                 Click="Btn1_Click"
-                Content="1"
+                Content="7"
                 FontSize="32">
         </Button>
         <Button Name="Btn8"
                 Grid.Row="4"
                 Grid.Column="1" 
                 Click="Btn1_Click"
-                Content="1"
+                Content="8"
                 FontSize="32">
         </Button>
         <Button Name="Btn9"
                 Grid.Row="4"
                 Grid.Column="2"
                 Click="Btn1_Click"
-                Content="1"
+                Content="9"
                 FontSize="32">
         </Button>
         <Button Name="Btn0"
                 Grid.Row="7"
                 Grid.Column="1"
                 Click="Btn1_Click"
-                Content="1"
+                Content="0"
                 FontSize="32">
         </Button>
         <Button Name="BtnPlus"
                 Grid.Row="6"
                 Grid.Column="3"
-                Click="BtnPlus_Click"
+                Click="BtnOp_Click"
                 Content="+"
                 FontSize="32">
         </Button>
         <Button Name="BtnMin"
                 Grid.Row="5"
                 Grid.Column="3"
-                Click="BtnMin_Click"
+                Click="BtnOp_Click"
                 Content="-"
                 FontSize="32">
         </Button>
@@ -133,21 +131,21 @@
         <Button Name="BtnPer"
                 Grid.Row="7"
                 Grid.Column="2"
-                Click="BtnPer_Click"
+                Click="Btn1_Click"
                 Content="."
                 FontSize="32">
         </Button>
         <Button Name="BtnMult"
                 Grid.Row="4"
                 Grid.Column="3"
-                Click="BtnMult_Click"
+                Click="BtnOp_Click"
                 Content="*"
                 FontSize="32">
         </Button>
         <Button Name="BtnDiv"
                 Grid.Row="3"
                 Grid.Column="3"
-                Click="BtnDiv_Click"
+                Click="BtnOp_Click"
                 Content="/"
                 FontSize="32">
         </Button>
