@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.CodeDom.Compiler;
+using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -21,10 +22,42 @@ namespace CalculatorGUI
             InitializeComponent();
         }
 
-        private static string Extract_Text(object sender)
+        private string Extract_Text(object sender)
         {
             Button b = (Button)sender;
             return b.Content.ToString();
+        }
+
+        private string result()
+        {
+            string[] ops = new string[10];
+            double sum = 0.0;
+            string[] words = equationBlock.Text.Split(" ");
+            sum += Convert.ToDouble(words[0]);
+            for (int i=2; i < words.Length; i+=2)
+            {
+                switch (words[i])
+                {
+                    case "+":
+                        sum += Convert.ToDouble(words[i]);
+                        break;
+                    case "-":
+                        sum -= Convert.ToDouble(words[i]);
+                        break;
+                    case "*":
+                        sum *= Convert.ToDouble(words[i]);
+                        break;
+                    case "/":
+                        sum /= Convert.ToDouble(words[i]);
+                        break;
+                }
+            }
+            return Convert.ToString(sum);
+        }
+
+        private bool opFlag()
+        {
+            static bool opflag = false;
         }
 
         private void Btn1_Click(object sender, RoutedEventArgs e)
@@ -34,13 +67,15 @@ namespace CalculatorGUI
 
         private void BtnEq_Click(object sender, RoutedEventArgs e)
         {
-            equationBlock.Text += numberBlock.Text;
+            equationBlock.Text += numberBlock.Text + " =";
+            numberBlock.Text = result();
         }
 
         private void BtnOp_Click(object sender, RoutedEventArgs e)
         {
             equationBlock.Text += numberBlock.Text;
             equationBlock.Text += " " + Extract_Text(sender) + " ";
+            numberBlock.Text = "";
         }
 
         private void BtnPM_Click(object sender, RoutedEventArgs e)
