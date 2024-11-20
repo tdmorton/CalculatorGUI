@@ -1,4 +1,5 @@
 ﻿using System.CodeDom.Compiler;
+using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -17,65 +18,86 @@ namespace CalculatorGUI
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private string lastVal = String.Empty;
+        private string lastOp = String.Empty;
+        private bool clrNumFlag = true;
+        private bool clrEqFlag = true;
+
         public MainWindow()
         {
             InitializeComponent();
         }
 
-        private string Extract_Text(object sender)
+        private string Result(string operation, string lastVal, string currentVal)
         {
-            Button b = (Button)sender;
-            return b.Content.ToString();
-        }
-
-        private string result()
-        {
-            string[] ops = new string[10];
-            double sum = 0.0;
-            string[] words = equationBlock.Text.Split(" ");
-            sum += Convert.ToDouble(words[0]);
-            for (int i=2; i < words.Length; i+=2)
-            {
-                switch (words[i])
+            decimal result = 0;
+                switch (operation)
                 {
-                    case "+":
-                        sum += Convert.ToDouble(words[i]);
-                        break;
-                    case "-":
-                        sum -= Convert.ToDouble(words[i]);
-                        break;
-                    case "*":
-                        sum *= Convert.ToDouble(words[i]);
-                        break;
-                    case "/":
-                        sum /= Convert.ToDouble(words[i]);
-                        break;
+                case "+":
+                    result = Convert.ToDecimal(lastVal) + Convert.ToDecimal(currentVal);
+                    break;
+                case "-":
+                    result = Convert.ToDecimal(lastVal) - Convert.ToDecimal(currentVal);
+                    break;
+                case "*":
+                    result = Convert.ToDecimal(lastVal) * Convert.ToDecimal(currentVal);
+                    break;
+                case "/":
+                    result = Convert.ToDecimal(lastVal) / Convert.ToDecimal(currentVal);
+                    break;
+                default:
+                    result = Convert.ToDecimal(currentVal);
+                    break;
                 }
-            }
-            return Convert.ToString(sum);
+            return Convert.ToString(result);
         }
+            
 
-        private bool opFlag()
+        private void opEquation()
         {
-            static bool opflag = false;
+            if (equationBlock.Text.Contains("=") || equationBlock.Text.Contains("+") || equationBlock.Text.Contains("-") || equationBlock.Text.Contains("*") || equationBlock.Text.Contains("/"))
+            {
+                equationBlock.Text = "";
+            }
         }
 
         private void Btn1_Click(object sender, RoutedEventArgs e)
         {
-            numberBlock.Text += Extract_Text(sender);
+            if (clrNumFlag)
+            {
+                numberBlock.Text = "0";
+                clrNumFlag = false;
+            }
+            if (clrEqFlag)
+            {
+                equationBlock.Text = "";
+                clrEqFlag = false;
+            }
+            if (numberBlock.Text == "0")
+            {
+                numberBlock.Text = "";
+            }
+
+            numberBlock.Text += ((Button)sender).Content.ToString();
         }
 
         private void BtnEq_Click(object sender, RoutedEventArgs e)
         {
             equationBlock.Text += numberBlock.Text + " =";
-            numberBlock.Text = result();
+            numberBlock.Text = Result(lastOp, lastVal, numberBlock.Text);
+            clrNumFlag = true;
+            clrEqFlag = true;
         }
 
         private void BtnOp_Click(object sender, RoutedEventArgs e)
         {
+            opEquation();
             equationBlock.Text += numberBlock.Text;
-            equationBlock.Text += " " + Extract_Text(sender) + " ";
-            numberBlock.Text = "";
+            equationBlock.Text += " " + ((Button)sender).Content + " ";
+            lastVal = numberBlock.Text;
+            lastOp = ((Button)sender).Content.ToString();
+            clrNumFlag = true;
         }
 
         private void BtnPM_Click(object sender, RoutedEventArgs e)
@@ -91,6 +113,47 @@ namespace CalculatorGUI
         private void BtnCE_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void BtnPer_Click(object sender, RoutedEventArgs e)
+        {
+            if (numberBlock.Text.Contains("."))
+            {
+                return;
+            }
+            Btn1_Click(sender, e);
+        }
+    }
+    public interface IOperation
+    {
+        public decimal DoOperation(decimal val1, decimal val2);
+    }
+    public class Sum:IOperation
+    {
+        public decimal DoOperation(decimal val1, decimal val2)
+        {
+            return val1 + val2;
+        }
+    }
+    public class Sub : IOperation
+    {
+        public decimal DoOperation(decimal val1, decimal val2)
+        {
+            return val1 - val2;
+        }
+    }
+    public class Mult : IOperation
+    {
+        public decimal DoOperation(decimal val1, decimal val2)
+        {
+            return val1 * val2;
+        }
+    }
+    public class Div : IOperation
+    {
+        public decimal DoOperation(decimal val1, decimal val2)
+        {
+            return val1 / val2;
         }
     }
 }

@@ -34,7 +34,8 @@
                    Grid.Column="0" 
                    Grid.ColumnSpan="4" 
                    FontSize="56" 
-                   HorizontalAlignment="Right">
+                   HorizontalAlignment="Right"
+                   Text="0">
         </TextBlock>
         <Button Name="Btn1"
                 Grid.Row="6"
@@ -131,7 +132,7 @@
         <Button Name="BtnPer"
                 Grid.Row="7"
                 Grid.Column="2"
-                Click="Btn1_Click"
+                Click="BtnPer_Click"
                 Content="."
                 FontSize="32">
         </Button>
