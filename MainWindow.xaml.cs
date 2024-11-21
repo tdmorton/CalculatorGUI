@@ -23,6 +23,7 @@ namespace CalculatorGUI
         private string lastOp = String.Empty;
         private bool clrNumFlag = true;
         private bool clrEqFlag = true;
+        private const int MAXLENGTH = 8;
 
         public MainWindow()
         {
@@ -32,8 +33,9 @@ namespace CalculatorGUI
         private string Result(string operation, string lastVal, string currentVal)
         {
             decimal result = 0;
-                switch (operation)
-                {
+            string strResult = "";
+            switch (operation)
+            {
                 case "+":
                     result = Convert.ToDecimal(lastVal) + Convert.ToDecimal(currentVal);
                     break;
@@ -49,10 +51,22 @@ namespace CalculatorGUI
                 default:
                     result = Convert.ToDecimal(currentVal);
                     break;
-                }
-            return Convert.ToString(result);
+            }
+            strResult = Convert.ToString(result);
+            if (result >= Math.Abs((decimal)Math.Pow(10, MAXLENGTH)))
+            {
+                return result.ToString("E3");
+            }
+            else if (strResult.Length >= MAXLENGTH)
+            {
+                return Math.Round(result, MAXLENGTH).ToString();
+            }
+            else
+            {
+                return result.ToString();
+            }
         }
-            
+
 
         private void opEquation()
         {
@@ -122,38 +136,6 @@ namespace CalculatorGUI
                 return;
             }
             Btn1_Click(sender, e);
-        }
-    }
-    public interface IOperation
-    {
-        public decimal DoOperation(decimal val1, decimal val2);
-    }
-    public class Sum:IOperation
-    {
-        public decimal DoOperation(decimal val1, decimal val2)
-        {
-            return val1 + val2;
-        }
-    }
-    public class Sub : IOperation
-    {
-        public decimal DoOperation(decimal val1, decimal val2)
-        {
-            return val1 - val2;
-        }
-    }
-    public class Mult : IOperation
-    {
-        public decimal DoOperation(decimal val1, decimal val2)
-        {
-            return val1 * val2;
-        }
-    }
-    public class Div : IOperation
-    {
-        public decimal DoOperation(decimal val1, decimal val2)
-        {
-            return val1 / val2;
         }
     }
 }

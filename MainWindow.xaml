@@ -33,8 +33,9 @@
                    Grid.Row="1" 
                    Grid.Column="0" 
                    Grid.ColumnSpan="4" 
-                   FontSize="56" 
+                   FontSize="36" 
                    HorizontalAlignment="Right"
+                   VerticalAlignment="Top"
                    Text="0">
         </TextBlock>
         <Button Name="Btn1"
