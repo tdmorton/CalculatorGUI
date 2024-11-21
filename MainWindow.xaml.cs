@@ -1,4 +1,5 @@
 ﻿using System.CodeDom.Compiler;
+using System.Globalization;
 using System.Reflection.PortableExecutable;
 using System.Text;
 using System.Windows;
@@ -20,6 +21,7 @@ namespace CalculatorGUI
     {
 
         private string lastVal = String.Empty;
+        private string currentVal = String.Empty;
         private string lastOp = String.Empty;
         private bool clrNumFlag = true;
         private bool clrEqFlag = true;
@@ -43,7 +45,7 @@ namespace CalculatorGUI
                     result = Convert.ToDecimal(lastVal) - Convert.ToDecimal(currentVal);
                     break;
                 case "*":
-                    result = Convert.ToDecimal(lastVal) * Convert.ToDecimal(currentVal);
+                    result = Decimal.Parse(lastVal, NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint) * Decimal.Parse(currentVal, NumberStyles.AllowExponent | NumberStyles.AllowDecimalPoint);
                     break;
                 case "/":
                     result = Convert.ToDecimal(lastVal) / Convert.ToDecimal(currentVal);
@@ -98,8 +100,18 @@ namespace CalculatorGUI
 
         private void BtnEq_Click(object sender, RoutedEventArgs e)
         {
-            equationBlock.Text += numberBlock.Text + " =";
-            numberBlock.Text = Result(lastOp, lastVal, numberBlock.Text);
+            if (clrEqFlag)
+            {
+                equationBlock.Text = numberBlock.Text + " " + lastOp + " " + currentVal + " =";
+                numberBlock.Text = Result(lastOp, currentVal, numberBlock.Text);
+            }
+            else
+            {
+                equationBlock.Text += numberBlock.Text + " =";
+                currentVal = numberBlock.Text;
+                numberBlock.Text = Result(lastOp, lastVal, numberBlock.Text);
+            }
+            
             clrNumFlag = true;
             clrEqFlag = true;
         }
